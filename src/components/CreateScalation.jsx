@@ -1,6 +1,6 @@
 //Version funcional 23/03/2025
 //UserAccesADmin 61a28b7f53f220a1f3a86aed
-import React, { useState, useEffect, useContext, useRef } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import _ from "lodash";
 import FormEscalation from "./FormEscalation";
 import { KustomerContext } from "../context/KustomerContext";
@@ -28,31 +28,7 @@ const CreateScalation = () => {
         scalatedConversation: null
     });
 
-    const formRef = useRef(null);
-
-    // Ajuste automático de altura con ResizeObserver
     useEffect(() => {
-        if (!formRef.current) return;
-        const resizeObserver = new window.ResizeObserver(() => {
-            console.log("🔄 ResizeObserver triggered");
-            if (window.Kustomer && typeof window.Kustomer.setHeight === "function") {
-                const height = formRef.current.scrollHeight + 40;
-                window.Kustomer.setHeight(height);
-            }
-        });
-        resizeObserver.observe(formRef.current);
-        // Ajuste inicial
-        if (window.Kustomer && typeof window.Kustomer.setHeight === "function") {
-            const height = formRef.current.scrollHeight + 40;
-            window.Kustomer.setHeight(height);
-        }
-        return () => resizeObserver.disconnect();
-    }, [state.formSelected, state.attachments, state.success, state.error, state.submitting]);
-
-    useEffect(() => {
-        
-
-
         if (context) {
             console.log("📌 Actualizando equipos del usuario con el contexto recibido.");
             setState(prev => ({
@@ -114,7 +90,7 @@ const CreateScalation = () => {
     ); console.log("📋 Formularios disponibles para este usuario:", availableForms);
 
     return (
-        <div ref={formRef}>
+        <div>
             <h3>Escalaciones</h3>
             {!userHasAccess ? (
                 <p>🔒 No tienes acceso a este formulario</p>
