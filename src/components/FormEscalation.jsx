@@ -32,6 +32,10 @@ const FormEscalation = ({ formType, setField, attachments, onSubmit }) => {
         setField(field, value);
     };
 
+    if (!formType || !formFieldTemplates[formType]) {
+        return <p></p>;
+    }
+
     return (
         <div className="form-escalation">
             <h3>{formType}</h3>
