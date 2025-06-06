@@ -46,7 +46,7 @@ const CreateScalation = () => {
     console.log("👤 Equipos del usuario:", userTeams);
     const userHasAccess = forms.some(form => {
         const access = form.teamsAuthorized.some(teamId => userTeams.includes(teamId));
-        //console.log(`🔍 Revisando acceso a "${form.form}"`);
+        //console.log(`🔍 Revisando accesos a "${form.form}"`);
         //console.log("📌 Equipos autorizados para este formulario:", form.teamsAuthorized);
         //console.log("🛠️ Equipos del usuario:", userTeams);
         //console.log(`✅ ¿Tiene acceso a este formulario?:`, access);
