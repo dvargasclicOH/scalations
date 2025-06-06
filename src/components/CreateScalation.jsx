@@ -100,6 +100,7 @@ const CreateScalation = () => {
                 <img src={loadingGif} alt="Enviando..." />
             ) : (
                 <>
+                <div>
                     <label>Selecciona un formulario:</label>
                     <select value={state.formSelected} onChange={e => setState({ ...state, formSelected: e.target.value })}>
                         <option value="">-- Selecciona --</option>
@@ -112,6 +113,7 @@ const CreateScalation = () => {
                         attachments={state.attachments} 
                         onSubmit={handleSubmit}
                     />
+                </div>
                 </>
             )}
             {state.error && <p>Error: {state.error}</p>}
