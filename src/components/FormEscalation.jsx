@@ -39,42 +39,48 @@ const FormEscalation = ({ formType, setField, attachments, onSubmit }) => {
     return (
         <div className="form-escalation">
             <h3>{formType}</h3>
-            <form onSubmit={(e) => onSubmit(e, formData)}>
-                {formFieldTemplates[formType].map(({ label, type, stateKey }) => (
-                    <div key={stateKey}>
-                        <label>{label}</label>
-                        <input
-                            type={type}
-                            value={formData[stateKey] || ""}
-                            onChange={e => handleChange(stateKey, e.target.value)}
-                            required
-                        />
-                    </div>
-                ))}
+            <div>
+                <div>
+                    <form onSubmit={(e) => onSubmit(e, formData)}>
+                        <div>
+                            {formFieldTemplates[formType].map(({ label, type, stateKey }) => (
+                                <div key={stateKey}>
+                                    <label>{label}</label>
+                                    <input
+                                        type={type}
+                                        value={formData[stateKey] || ""}
+                                        onChange={e => handleChange(stateKey, e.target.value)}
+                                        required
+                                    />
+                                </div>
+                            ))}
+                        </div>
+                        <footer>
+                            <label>Adjuntar archivo:</label>
+                            <input type="file" multiple onChange={handleFileChange} />
 
-                <label>Adjuntar archivo:</label>
-                <input type="file" multiple onChange={handleFileChange} />
-
-                {attachments.length > 0 && (
-                    <ul className="upload-list">
-                        {attachments.map((file, index) => (
-                            <li className="upload-item" key={index}>
-                                <span>{file.name}</span>
-                                <span
-                                    className="upload-remove"
-                                    onClick={() =>
-                                        setField("attachments", attachments.filter((_, i) => i !== index))
-                                    }
-                                >
-                                    ❌
-                                </span>
-                            </li>
-                        ))}
-                    </ul>
-                )}
-
-                <button type="submit">Enviar</button>
-            </form>
+                            {attachments.length > 0 && (
+                                <ul className="upload-list">
+                                    {attachments.map((file, index) => (
+                                        <li className="upload-item" key={index}>
+                                            <span>{file.name}</span>
+                                            <span
+                                                className="upload-remove"
+                                                onClick={() =>
+                                                    setField("attachments", attachments.filter((_, i) => i !== index))
+                                                }
+                                            >
+                                                ❌
+                                            </span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
+                            <button type="submit">Enviar</button>
+                        </footer>
+                    </form>
+                </div>
+            </div>
         </div>
     );
 };
