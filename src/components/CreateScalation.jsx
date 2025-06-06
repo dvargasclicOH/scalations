@@ -39,8 +39,9 @@ const CreateScalation = () => {
                 window.Kustomer.setHeight(height);
             }
         };
-        adjustHeight();
-        // También puedes escuchar cambios de tamaño si el contenido es muy dinámico
+        // Espera 50ms para asegurar que el DOM esté actualizado
+        const timeout = setTimeout(adjustHeight, 50);
+        return () => clearTimeout(timeout);
     }, [state.formSelected, state.attachments, state.success, state.error, state.submitting]);
 
     useEffect(() => {
