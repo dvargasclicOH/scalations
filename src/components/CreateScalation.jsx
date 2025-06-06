@@ -6,6 +6,7 @@ import FormEscalation from "./FormEscalation";
 import { KustomerContext } from "../context/KustomerContext";
 import loadingGif from "../assets/loading.gif";
 import "../styles/styles.css";
+import { useRef } from "react";
 
 const forms = [
     { form: "Operaciones", teamsAuthorized: ["61a28b7f53f220a1f3a86aed", "team2"] },
@@ -27,7 +28,25 @@ const CreateScalation = () => {
         scalatedConversationMessages: [],
         scalatedConversation: null
     });
+
+    const formRef = useRef(null);
+
     useEffect(() => {
+        // Ajusta la altura cada vez que el formulario cambia
+        const adjustHeight = () => {
+            if (window.Kustomer && typeof window.Kustomer.setHeight === "function" && formRef.current) {
+                const height = formRef.current.scrollHeight + 40; // margen extra opcional
+                window.Kustomer.setHeight(height);
+            }
+        };
+        adjustHeight();
+        // También puedes escuchar cambios de tamaño si el contenido es muy dinámico
+    }, [state.formSelected, state.attachments, state.success, state.error, state.submitting]);
+
+    useEffect(() => {
+        
+
+
         if (context) {
             console.log("📌 Actualizando equipos del usuario con el contexto recibido.");
             setState(prev => ({
@@ -89,7 +108,7 @@ const CreateScalation = () => {
     ); console.log("📋 Formularios disponibles para este usuario:", availableForms);
 
     return (
-        <div>
+        <div ref={formRef}>
             <h3>Escalaciones</h3>
             {!userHasAccess ? (
                 <p>🔒 No tienes acceso a este formulario</p>
