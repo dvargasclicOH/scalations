@@ -34,6 +34,7 @@ const CreateScalation = () => {
     useEffect(() => {
         if (!formRef.current) return;
         const resizeObserver = new window.ResizeObserver(() => {
+            console.log("🔄 ResizeObserver triggered");
             if (window.Kustomer && typeof window.Kustomer.setHeight === "function") {
                 const height = formRef.current.scrollHeight + 40;
                 window.Kustomer.setHeight(height);
