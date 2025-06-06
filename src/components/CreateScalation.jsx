@@ -1,12 +1,11 @@
 //Version funcional 23/03/2025
 //UserAccesADmin 61a28b7f53f220a1f3a86aed
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import _ from "lodash";
 import FormEscalation from "./FormEscalation";
 import { KustomerContext } from "../context/KustomerContext";
 import loadingGif from "../assets/loading.gif";
 import "../styles/styles.css";
-import { useRef } from "react";
 
 const forms = [
     { form: "Operaciones", teamsAuthorized: ["61a28b7f53f220a1f3a86aed", "team2"] },
@@ -31,17 +30,22 @@ const CreateScalation = () => {
 
     const formRef = useRef(null);
 
+    // Ajuste automático de altura con ResizeObserver
     useEffect(() => {
-        // Ajusta la altura cada vez que el formulario cambia
-        const adjustHeight = () => {
-            if (window.Kustomer && typeof window.Kustomer.setHeight === "function" && formRef.current) {
-                const height = formRef.current.scrollHeight + 40; // margen extra opcional
+        if (!formRef.current) return;
+        const resizeObserver = new window.ResizeObserver(() => {
+            if (window.Kustomer && typeof window.Kustomer.setHeight === "function") {
+                const height = formRef.current.scrollHeight + 40;
                 window.Kustomer.setHeight(height);
             }
-        };
-        // Espera 50ms para asegurar que el DOM esté actualizado
-        const timeout = setTimeout(adjustHeight, 50);
-        return () => clearTimeout(timeout);
+        });
+        resizeObserver.observe(formRef.current);
+        // Ajuste inicial
+        if (window.Kustomer && typeof window.Kustomer.setHeight === "function") {
+            const height = formRef.current.scrollHeight + 40;
+            window.Kustomer.setHeight(height);
+        }
+        return () => resizeObserver.disconnect();
     }, [state.formSelected, state.attachments, state.success, state.error, state.submitting]);
 
     useEffect(() => {
