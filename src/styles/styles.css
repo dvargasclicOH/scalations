@@ -33,6 +33,6 @@ button {
   cursor: pointer;
 }
 
-form-container {
-  height: 100px;
+.form-escalation {
+  height: 100%;
 }
