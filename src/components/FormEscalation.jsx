@@ -37,7 +37,7 @@ const FormEscalation = ({ formType, setField, attachments, onSubmit }) => {
     }
 
     return (
-        <div className="form-container">
+        <div className="form-escalation">
             <h3>{formType}</h3>
             <form onSubmit={(e) => onSubmit(e, formData)}>
                 {formFieldTemplates[formType].map(({ label, type, stateKey }) => (
