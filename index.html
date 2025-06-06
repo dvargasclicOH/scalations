@@ -12,10 +12,15 @@
       script.src = "https://cdn.kustomerapp.com/card-js/latest/kustomer-card.min.js";
       script.onload = () => console.log("✅ Kustomer Script Cargado");
       document.head.appendChild(script);
+      
     } else {
       console.warn("La aplicación no se está ejecutando dentro de un iframe.");
     }
   </script>
+  <script>
+  const iframe = document.getElementById("kustomer-ui-sdk-iframe");
+  iframe.style.height = "600px";
+</script>
 </head>
 
 <body>
