@@ -100,7 +100,7 @@ const CreateScalation = () => {
                 <img src={loadingGif} alt="Enviando..." />
             ) : (
                 <>
-                <div>
+                <div style={{ padding: '10px' }}>
                     <label>Selecciona un formulario:</label>
                     <select value={state.formSelected} onChange={e => setState({ ...state, formSelected: e.target.value })}>
                         <option value="">-- Selecciona --</option>
